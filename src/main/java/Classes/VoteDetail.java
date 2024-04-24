@@ -1,3 +1,5 @@
+package Classes;
+
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -39,6 +41,10 @@ public class VoteDetail {
         this.date = LocalDate.now();
         this.time = LocalTime.now();
     }  
+
+    public VoteDetail() {
+    }
+
 
     public int getUniqueIndex() {
         return uniqueIndex;
