@@ -31,7 +31,8 @@ public class ExtractVoteData {
             //<Vardhan's Code Start Here>
             ArrayList<String> alexisHtmlFilesToParse = new ArrayList<String>();
               OkVote.VardhanModuga.VoteDetailExtractor voteDetailExtrator = new OkVote.VardhanModuga.VoteDetailExtractor();
-              
+            ListOfVoteDataToSaveToCsvFile = voteDetailExtrator.Execute(alexisHtmlFilesToParse);
+
             // <End Vardhan's Code>
             
             // Tasmin's Code To Save the list of bills with their details to CSV file
