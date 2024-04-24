@@ -18,14 +18,20 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 /**
  *
- * @author sdoherty
+ * @author Stephen Doherty
+ * Playwright: Census Automation Library used To Download Excel File
  * https://playwright.dev/java/docs/browsers#install-browsers
  * https://playwright.dev/java/docs/downloads#introduction
+ * 
+ * AI Links:
  * https://chat.openai.com/share/e/9b46d859-f39a-4829-a682-8e6e1d6e23ea
+ * 
+ * Worked With:
+ * Vardhan and Alexis
  */
 public class dohertsFileDownloader {
     public String CommitteeVotesUrl = "https://former.okhouse.gov/Committees/ShowVotes.aspx";
-    private String ExcelFileDownloadButtonId = "button#ctl00_ContentPlaceHolder1_RadGrid1_ctl00_ctl02_ctl00_ExportToExcelButton";
+    private final String ExcelFileDownloadButtonId = "button#ctl00_ContentPlaceHolder1_RadGrid1_ctl00_ctl02_ctl00_ExportToExcelButton";
    
     public ArrayList<String> GetCommitteeRecords()
     {
@@ -35,12 +41,19 @@ public class dohertsFileDownloader {
         
          String filePath = GetCommitteeRecordsFile();
          ArrayList<VoteRecordDto> committeeRecords = ParseCommitteeRecordsFile(filePath);
-
+         ArrayList<String> houseNumbersList = committeeRecords.stream().map(VoteRecordDto::getMeasureNumber).collect(Collectors.toCollection(ArrayList::new));
         System.out.println("Now returning Committee Records File Bills (MeasureNumbers) only");
+        
+        for (String output : houseNumbersList) {
+               System.out.println(output);
+        }
+        
+        System.out.println("End Of Committee Records Finished");
+
         System.out.println("*******************************");
         System.out.println("*** Stephen's Code FINISHED ***");
         System.out.println("*******************************");
-        return committeeRecords.stream().map(VoteRecordDto::getMeasureNumber).collect(Collectors.toCollection(ArrayList::new));
+        return houseNumbersList;
     }
     
     private ArrayList<VoteRecordDto> ParseCommitteeRecordsFile(String htmlFilePath)
@@ -81,7 +94,7 @@ public class dohertsFileDownloader {
     }
 
     private String GetCommitteeRecordsFile() {
-        String suggestedFilename = "";
+        String suggestedFilename;
         Path outputFilePath;
         
         try (Playwright playwright = Playwright.create()) {
