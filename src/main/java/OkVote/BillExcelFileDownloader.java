@@ -4,10 +4,11 @@
  */
 package OkVote;
 
+import com.microsoft.playwright.*;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
-import com.microsoft.playwright.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -27,6 +28,12 @@ public class BillExcelFileDownloader {
          String filePath = DownloadCommitteeRecordsFile();
     
          // Default until I finish logic for parsing the file.
+        return new ArrayList<String>();
+    }
+    
+    private ArrayList<String> ParseCommitteeRecordsFile(String filePath)
+    {
+        // Parse the Excel file and return the data as a list of strings
         return new ArrayList<String>();
     }
 
