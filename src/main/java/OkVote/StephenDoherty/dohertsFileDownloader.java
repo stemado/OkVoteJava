@@ -76,45 +76,47 @@ public class dohertsFileDownloader {
         Path outputFilePath;
         
         try (Playwright playwright = Playwright.create()) {
-            // Set-up Playwright to use Chromium and setHeadless to false which allows us to watch the browser automation operate
+
+            System.out.println("Set-up Playwright to use Chromium and setHeadless to false which allows us to watch the browser automation operate");
             Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(1000));
-            
-            // Open a new Chrome browser page
+
+            System.out.println("Opening a new Chrome browser web page");
             Page page = browser.newPage();
-            
-            // Navigate to the Committee Votes page
+
+
+            System.out.println("Navigating to the Committee Votes page");
             page.navigate(CommitteeVotesUrl);
 
-            // Locate the Excel file download button on the page
+            System.out.println("Locating the Excel file download button on the page");
             Locator button = page.locator(ExcelFileDownloadButtonId);
             
-            // Wait for the button to be ready and visible on the page
+            System.out.println("Waiting for the button to be ready and visible on the page");
             button.waitFor();
 
             // Wait for the download to start after clicking the Excel button
             Download download = page.waitForDownload(() -> {
-                // click the Excel link to download the file
+                System.out.println("Clicking the Excel link to download the file");
                 button.click();
                 
             });
 
-            // Get user's downloads folder path to save the file to
-            // Call GetUserDirectoryDownloadsFolderPath() from constructor
-            
+            System.out.println("Getting user's downloads folder path to save the file to");
             String downloadsFolderPath = GetUserDirectoryDownloadsFolderPath();
             
-            // Get suggested file name which is the name of the file being downloaded
+            System.out.println("Getting file name from server");
             suggestedFilename = download.suggestedFilename();
             
-            // Change suggestedFileName extension from .xls to .html
-            suggestedFilename = suggestedFilename.replace(".xls", ".html");
+            System.out.println("Changing suggestedFileName extension from .xls to .html");
             
-            // Join downloadsFolderPath, suggestedFilename to outputFilePath
+            suggestedFilename = suggestedFilename.replace(".xls", ".html");
+
+            System.out.println("Joining `downloadsFolderPath` and `suggestedFilename` to outputFilePath");
             outputFilePath = Paths.get(downloadsFolderPath, suggestedFilename);
             
-            // Wait for the download process to complete and save the downloaded file somewhere
+            System.out.println("Waiting for the download process to complete and save the downloaded file to " + outputFilePath.toString());
             download.saveAs(outputFilePath);
 
+            System.out.println("Finished. Returning downloaded file path");
             return outputFilePath.toString();
             
         }
