@@ -7,15 +7,19 @@ import java.util.ArrayList;
 public class ExtractVoteData {
     
     public ArrayList<String> ListOfBillNumbers = new ArrayList<String>();
-    
+    public dohertsFileDownloader CommitteeExcelFileDownloader;
+    public ExtractVoteData()
+    {
+        CommitteeExcelFileDownloader = new dohertsFileDownloader();
+        
+    }
     public void Run()
     {
         try {
+            System.out.println("ExtractVoteData is running...");
             // Stephen's code to download the list of bills from the Oklahoma House of Representatives website
             // <Stephen's Code Start Here>
-            dohertsFileDownloader committeeExcelFileDownloader = new dohertsFileDownloader();
-            
-            ListOfBillNumbers = committeeExcelFileDownloader.GetCommitteeRecords();
+            ListOfBillNumbers = CommitteeExcelFileDownloader.GetCommitteeRecords();
             // <End Stephen's Code>
             
             // Alexis' Code to take the `ListOfBills`, build the url from each bill, and return the html content to Vardhan as an ArrayList<String>
@@ -32,6 +36,10 @@ public class ExtractVoteData {
             //<Tasmin's Code Start Here>
             // ...place your code here...
             // <End Tasmin's Code>
+            
+            
+            System.out.println("ExtractVoteData Finished Running");
+            
         }
         catch (Exception e)
         {

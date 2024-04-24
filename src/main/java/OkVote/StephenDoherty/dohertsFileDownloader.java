@@ -29,14 +29,23 @@ public class dohertsFileDownloader {
    
     public ArrayList<String> GetCommitteeRecords()
     {
+        System.out.println("*******************************");
+        System.out.println("*** Stephen's Code STARTED ***");
+        System.out.println("*******************************");
+        
          String filePath = GetCommitteeRecordsFile();
          ArrayList<VoteRecordDto> committeeRecords = ParseCommitteeRecordsFile(filePath);
-         
+
+        System.out.println("Now returning Committee Records File Bills (MeasureNumbers) only");
+        System.out.println("*******************************");
+        System.out.println("*** Stephen's Code FINISHED ***");
+        System.out.println("*******************************");
         return committeeRecords.stream().map(VoteRecordDto::getMeasureNumber).collect(Collectors.toCollection(ArrayList::new));
     }
     
     private ArrayList<VoteRecordDto> ParseCommitteeRecordsFile(String htmlFilePath)
     {
+        System.out.println("Now parsing Committee Records File...");
         ArrayList<VoteRecordDto> voteRecords = new ArrayList<>();
 
         try {
