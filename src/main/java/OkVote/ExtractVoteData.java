@@ -29,7 +29,9 @@ public class ExtractVoteData {
             
             // Vardhan and Harshitha's Code to parse the html contents and return the list of bills with their details
             //<Vardhan's Code Start Here>
-            // ...place your code here...
+            ArrayList<String> alexisHtmlFilesToParse = new ArrayList<String>();
+              OkVote.VardhanModuga.VoteDetailExtractor voteDetailExtrator = new OkVote.VardhanModuga.VoteDetailExtractor();
+              
             // <End Vardhan's Code>
             
             // Tasmin's Code To Save the list of bills with their details to CSV file
